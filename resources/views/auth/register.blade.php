@@ -8,10 +8,34 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <div class="mt-4">
+                <x-jet-label value="{{ __('ID Karyawan') }}" />
+                <x-jet-input class="block mt-1 w-full" type="number" name="nik" :value="old('nik')" required autofocus autocomplete="nik" />
+            </div>
 
-            <div>
-                <x-jet-label value="{{ __('Name') }}" />
-                <x-jet-input class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <div class="mt-4">
+                <x-jet-label value="{{ __('Nama') }}" />
+                <x-jet-input class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label value="{{ __('Divisi') }}" />
+                <x-jet-input class="block mt-1 w-full" type="text" name="divisi" :value="old('divisi')" required autocomplete="divisi" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label value="{{ __('Jabatan') }}" />
+                <x-jet-input class="block mt-1 w-full" type="text" name="jabatan" :value="old('jabatan')" required autocomplete="jabatan" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label value="{{ __('Lokasi') }}" />
+                <x-jet-input class="block mt-1 w-full" type="text" name="lokasi" :value="old('lokasi')" required autocomplete="lokasi" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label value="{{ __('Telepon') }}" />
+                <x-jet-input class="block mt-1 w-full" type="text" name="telepon" :value="old('telepon')" required autocomplete="telepon" />
             </div>
 
             <div class="mt-4">

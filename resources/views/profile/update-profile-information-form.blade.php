@@ -52,11 +52,46 @@
             </div>
         @endif
 
+        <!-- NIK -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="nik" value="{{ __('ID') }}" />
+            <x-jet-input id="nik" type="text" class="mt-1 block w-full" wire:model.defer="state.nik" autocomplete="nik" />
+            <x-jet-input-error for="nik" class="mt-2" />
+        </div>
+
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('Name') }}" />
             <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />
+        </div>
+
+        <!-- Divisi -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="divisi" value="{{ __('Divisi') }}" />
+            <x-jet-input id="divisi" type="text" class="mt-1 block w-full" wire:model.defer="state.divisi" autocomplete="divisi" />
+            <x-jet-input-error for="divisi" class="mt-2" />
+        </div>
+
+        <!-- Jabatan -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="jabatan" value="{{ __('Jabatan') }}" />
+            <x-jet-input id="jabatan" type="text" class="mt-1 block w-full" wire:model.defer="state.jabatan" autocomplete="jabatan" />
+            <x-jet-input-error for="jabatan" class="mt-2" />
+        </div>
+
+        <!-- Lokasi -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="lokasi" value="{{ __('Lokasi') }}" />
+            <x-jet-input id="lokasi" type="text" class="mt-1 block w-full" wire:model.defer="state.lokasi" autocomplete="lokasi" />
+            <x-jet-input-error for="lokasi" class="mt-2" />
+        </div>
+
+        <!-- telepon -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="telepon" value="{{ __('Telepon') }}" />
+            <x-jet-input id="telepon" type="text" class="mt-1 block w-full" wire:model.defer="state.telepon" autocomplete="telepon" />
+            <x-jet-input-error for="telepon" class="mt-2" />
         </div>
 
         <!-- Email -->
