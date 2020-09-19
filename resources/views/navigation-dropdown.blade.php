@@ -15,6 +15,16 @@
                     <x-jet-nav-link href="/dashboard" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="/history" :active="request()->routeIs('riwayat')">
+                        Riwayat
+                    </x-jet-nav-link>
+
+                    @role('admin')
+                        <x-jet-nav-link href="/users" :active="request()->routeIs('users')">
+                            User List
+                        </x-jet-nav-link>
+                    @endrole
                 </div>
             </div>
 
@@ -37,11 +47,13 @@
                             {{ __('Profile') }}
                         </x-jet-dropdown-link>
 
-                        @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                            <x-jet-dropdown-link href="/user/api-tokens">
-                                {{ __('API Tokens') }}
-                            </x-jet-dropdown-link>
-                        @endif
+                        @role('admin')
+                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                                <x-jet-dropdown-link href="/user/api-tokens">
+                                    {{ __('API Tokens') }}
+                                </x-jet-dropdown-link>
+                            @endif
+                        @endrole
 
                         <div class="border-t border-gray-100"></div>
 
