@@ -10,6 +10,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 
+        <!-- Icon -->
+        <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
