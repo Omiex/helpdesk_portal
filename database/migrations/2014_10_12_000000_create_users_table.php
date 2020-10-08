@@ -17,10 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->integer('nik')->unique();
             $table->string('name');
-            $table->string('divisi', 24);
-            $table->string('jabatan', 24);
-            $table->string('lokasi', 24);
-            $table->string('telepon', 13);
+            $table->string('divisi', 52);
+            $table->string('jabatan', 52);
+            $table->string('lokasi', 52);
+            $table->string('telepon', 15);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
