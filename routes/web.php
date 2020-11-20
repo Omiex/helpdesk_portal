@@ -23,4 +23,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('user', function () {
 	return view('user.index');
-})->middleware(['auth', 'role:admin']);
+})->middleware(['auth', 'role:admin'])->name('user.index');
+
+Route::get('/blog', [Controller::class, 'index']);

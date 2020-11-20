@@ -1,4 +1,4 @@
-<div wire:loading wire:target="detail, delete" class="fixed z-10 inset-0 overflow-y-auto transition-all ease-out duration-400">
+<div wire:loading wire:target="delete" class="fixed z-10 inset-0 overflow-y-auto transition-all ease-out duration-400">
   <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
     <div class="fixed inset-0 transition-opacity">
       <div class="absolute inset-0 bg-gray-500 opacity-75" wire:click="closeModal()"></div>
