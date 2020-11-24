@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProblemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
 	return redirect()->route('dashboard');
 });
 
@@ -26,4 +26,6 @@ Route::get('user', function () {
 	return view('user.index');
 })->middleware(['auth', 'role:admin'])->name('user.index');
 
-Route::get('/blog', [Controller::class, 'index']);
+Route::resource('problem', ProblemController::class)->middleware(['auth', 'role:user']);
+
+// Route::get('/blog', [Controller::class, 'index']);

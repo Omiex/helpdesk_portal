@@ -26,7 +26,7 @@
         </div>
 
         <div class="ml-12">
-			<x-open-ticket.index />
+			<livewire:open-ticket />
         </div>
     </div>
 

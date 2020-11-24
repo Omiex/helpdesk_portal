@@ -73,4 +73,14 @@ class User extends Authenticatable
         }
         return false;
     }
+
+	public function problem()
+	{
+		return $this->hasMany(Problem::class);
+	}
+
+	public function progress()
+	{
+		return $this->hasMany(Progress::class, 'proceed_by');
+	}
 }

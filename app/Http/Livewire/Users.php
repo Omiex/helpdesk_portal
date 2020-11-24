@@ -25,7 +25,8 @@ class Users extends Component
 			$search = '%' . join('%', str_split($this->search)) . '%';
 			$this->users->where('name', 'like', $search)
 				->orWhere('divisi', 'like', $search)
-				->orWhere('jabatan', 'like', $search);
+				->orWhere('jabatan', 'like', $search)
+				->orWhere('nik', 'like', $search);
 		}
 		return view('livewire.users.index', [
 			'users' => $this->users->paginate($this->limit)->onEachSide(2),
