@@ -3,7 +3,7 @@
 	x-show="modalOpen"
 	x-on:close.stop="show = false"
 	x-on:keydown.escape.window="show = false"
-	class="max-h-screen overflow-y-auto fixed top-0 inset-x-0 px-4 py-6 sm:flex sm:items-top sm:justify-center"
+	class="max-h-screen overflow-y-auto fixed top-0 inset-x-0 px-4 py-6 sm:flex sm:items-top sm:justify-center z-10"
 	style="display: none;"
 >
 	<div x-show="modalOpen" class="fixed inset-0 transform transition-all" x-on:click="show = false"

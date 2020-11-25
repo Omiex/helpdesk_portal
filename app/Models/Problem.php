@@ -15,4 +15,14 @@ class Problem extends Model
 	{
 		return $this->belongsTo(User::class);
 	}
+
+	public function progress()
+	{
+		return $this->hasMany(Progress::class);
+	}
+
+	public function onProgress()
+	{
+		return $this->hasMany(Progress::class)->where('process', 'on progress');
+	}
 }

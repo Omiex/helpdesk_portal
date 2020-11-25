@@ -18,14 +18,17 @@ Route::get('/', function () {
 	return redirect()->route('dashboard');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])
+	->get('dashboard', function() {
+		return view('dashboard');
+	})->name('dashboard');
 
-Route::get('user', function () {
-	return view('user.index');
-})->middleware(['auth', 'role:admin'])->name('user.index');
+Route::middleware(['auth', 'role:admin'])
+	->get('user', function () {
+		return view('user.index');
+	})->name('user.index');
 
-Route::resource('problem', ProblemController::class)->middleware(['auth', 'role:user']);
-
-// Route::get('/blog', [Controller::class, 'index']);
+Route::middleware(['auth', 'role:admin,staff'])
+	->get('tickets', function() {
+		return view('tickets');
+	})->name('tickets');

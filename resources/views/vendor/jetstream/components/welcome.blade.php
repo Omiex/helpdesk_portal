@@ -53,90 +53,10 @@
     </div>
 
     <div class="p-6 border-t border-gray-200">
-        <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400">
-				<path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-				</path>
-			</svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-				New Request(s)
-			</div>
-        </div>
-
-        <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-				<table class="table table-auto w-full">
-					<thead>
-						<tr>
-							<th class="border-b">#</th>
-							<th class="border-b text-left">Name</th>
-							<th class="border-b text-left">Division</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th>1</th>
-							<td>Komaruddin</td>
-							<td>IT</td>
-						</tr>
-						<tr>
-							<th>2</th>
-							<td>Lukman Sanjaya</td>
-							<td>Programmer</td>
-						</tr>
-						<tr>
-							<th>3</th>
-							<td>Fajar Fadli</td>
-							<td>IT</td>
-						</tr>
-					</tbody>
-				</table>
-            </div>
-        </div>
+		<livewire:new-request />
     </div>
 
     <div class="p-6 border-t border-gray-200 md:border-l">
-        <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400">
-				<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-				</path>
-			</svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">On Progress(es)</div>
-        </div>
-
-        <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-				<table class="table table-auto w-full">
-					<thead>
-						<tr>
-							<th class="border-b">#</th>
-							<th class="border-b text-left">Name</th>
-							<th class="border-b text-left">Division</th>
-							<th class="border-b text-left">Proceed by</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th>1</th>
-							<td>Komaruddin</td>
-							<td>IT</td>
-							<td>Arie S.</td>
-						</tr>
-						<tr>
-							<th>2</th>
-							<td>Lukman Sanjaya</td>
-							<td>Programmer</td>
-							<td>Dirma D. M.</td>
-						</tr>
-						<tr>
-							<th>3</th>
-							<td>Fajar Fadli</td>
-							<td>IT</td>
-							<td>Aziz S.</td>
-						</tr>
-					</tbody>
-				</table>
-            </div>
-        </div>
+		<livewire:on-progress />
     </div>
 </div>

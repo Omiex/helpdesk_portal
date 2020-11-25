@@ -15,8 +15,8 @@ class Progress extends Model
 	{
 		return $this->belongsTo(Problem::class);
 	}
-	
-	public function staff()
+
+	public function proceed_by()
 	{
 		return $this->belongsTo(User::class, 'proceed_by');
 	}

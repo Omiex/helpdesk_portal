@@ -16,9 +16,11 @@
 						{{ __('Dashboard') }}
 					</x-jet-nav-link>
 
-					{{-- <x-jet-nav-link href="/history" :active="request()->routeIs('history')">
-						Riwayat
-					</x-jet-nav-link> --}}
+					@role('admin', 'staff')
+					<x-jet-nav-link href="{{ route('tickets') }}" :active="request()->routeIs('tickets')">
+						Tickets
+					</x-jet-nav-link>
+					@endrole
 
 					@role('admin')
 					<x-jet-nav-link href="/user" :active="request()->routeIs('user.index')">
