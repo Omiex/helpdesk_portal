@@ -9,7 +9,7 @@ class Progress extends Model
 {
     use HasFactory;
 
-	protected $fillable = ['problem_id', 'proceed_by', 'process', 'description'];
+	protected $fillable = ['problem_id', 'staff_id', 'process', 'description'];
 
 	public function problem()
 	{
@@ -18,6 +18,6 @@ class Progress extends Model
 
 	public function proceed_by()
 	{
-		return $this->belongsTo(User::class, 'proceed_by');
+		return $this->belongsTo(User::class, 'staff_id');
 	}
 }

@@ -32,7 +32,7 @@
 						<th>{{ $loop->iteration }}</th>
 						<td>{{ $problem->user->name }}</td>
 						<td>{{ $problem->user->divisi }}</td>
-						<td>{{ $problem->progress->proceed_by->name }}</td>
+						<td>{{ $problem->progress->last()->proceed_by->name }}</td>
 					</tr>
 					@php
 						$onProgress = $loop->count
