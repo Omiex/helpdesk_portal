@@ -16,9 +16,9 @@ class CreateProgressTable extends Migration
         Schema::create('progress', function (Blueprint $table) {
             $table->id();
 			$table->bigInteger('problem_id');
-			$table->bigInteger('proceed_by');
+			$table->bigInteger('staff_id');
 			$table->string('process');
-			$table->string('description');
+			$table->string('description')->nullable();
             $table->timestamps();
         });
     }
