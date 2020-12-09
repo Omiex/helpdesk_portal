@@ -1,5 +1,5 @@
-<div x-data="{ show: false }" role="button">
-	<h1 @click="show = !show">
+<div x-data="table()">
+	<h1 @click="show = !show" role="button">
 		<x-process.arrow />
 		@if ($problems->count() < 2)
 			{{ Str::title($type) }}
@@ -19,6 +19,7 @@
 		x-transition:leave="transition ease-out duration-200"
 		x-transition:leave-start="opacity-100 transform scale-y-100 origin-top"
 		x-transition:leave-end="opacity-0 transform scale-y-90 origin-top"
+		style="display: none"
 	>
 		<div class="max-h-96 overflow-auto">
 			<table class="table-auto w-full">
@@ -35,6 +36,9 @@
 						<x-process.th>Email</x-process.th>
 						<x-process.th>Phone</x-process.th>
 						<x-process.th>Description</x-process.th>
+						@if ($type == 'take over')
+							<x-process.th>Remark</x-process.th>
+						@endif
 						<x-process.th>Capture</x-process.th>
 						<x-process.th>Action</x-process.th>
 					</tr>
@@ -47,7 +51,7 @@
 								$problem = $p->problem;
 							}
 						@endphp
-						<tr>
+						<tr wire:key="{{ $p->id }}">
 							<x-process.th scope="row" class="text-center">{{ $loop->iteration }}</x-process.th>
 							<x-process.td>{{ $problem->ticket_number }}</x-process.td>
 							<x-process.td>{{ $problem->created_at }}</x-process.td>
@@ -59,23 +63,26 @@
 							<x-process.td>{{ $problem->user->email }}</x-process.td>
 							<x-process.td>{{ $problem->user->telepon }}</x-process.td>
 							<x-process.td>{{ $problem->description }}</x-process.td>
+							@if ($type == 'take over')
+								<x-process.td>{{ $p->description }}</x-process.td>
+							@endif
 							<x-process.td>{{ $problem->image_path }}</x-process.td>
-							<x-process.td>
+							<x-process.td class="text-right">
 								@if ($type != 'on progress')
-									<x-process.button wire:click="process({{ $problem->id }})">
+									<x-process.button x-on:click="$wire.create('on progress', {{ $problem->id }})">
 										Process
 									</x-process.button>
 								@endif
 								@if ($type == 'new request')
-									<x-process.button wire:click="decline({{ $problem->id }})" color="red">
+									<x-process.button x-on:click="prompt('declined', {{ $problem->id }}, '{{ $problem->ticket_number }}')" color="red">
 										Decline
 									</x-process.button>
 								@endif
 								@if ($type == 'on progress')
-									<x-process.button wire:click="finish({{ $problem->id }})">
+									<x-process.button x-on:click="prompt('finish', {{ $problem->id }}, '{{ $problem->ticket_number }}')">
 										Finish
 									</x-process.button>
-									<x-process.button wire:click="takeOver({{ $problem->id }})" color="orange">
+									<x-process.button x-on:click="prompt('take over', {{ $problem->id }}, '{{ $problem->ticket_number }}')" color="orange">
 										Take Over
 									</x-process.button>
 								@endif
@@ -91,4 +98,5 @@
 			@endif
 		</div>
 	</div>
+	@include('components.process.descriptionModal')
 </div>

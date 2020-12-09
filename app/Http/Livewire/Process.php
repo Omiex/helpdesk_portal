@@ -10,7 +10,6 @@ use Auth;
 class Process extends Component
 {
 	protected $listeners = ['refresh' => '$refresh'];
-	protected $description = '';
 
     public function render()
     {
@@ -18,10 +17,7 @@ class Process extends Component
 		$newRequest = Problem::doesntHave('progress')->get();
 
 		//////// Get progress data
-		$progress = Progress::with('proceed_by')
-			->with('problem')
-			->get()
-			->groupBy('problem_id');
+		$progress = Progress::grouped();
 
 		// Get on progress request
 		$onProgress = collect();
@@ -42,41 +38,17 @@ class Process extends Component
         return view('livewire.process', compact('newRequest', 'onProgress', 'takeOver'));
     }
 
-	public function create($process, $id)
+	public function create($process, $id, $desc = '')
 	{
 		$progress = new Progress;
 		$progress->create([
 			'problem_id' => $id,
 			'staff_id' => Auth::user()->id,
 			'process' => $process,
-			'description' => $this->description
+			'description' => $desc
 		]);
-	}
-
-	public function process($id)
-	{
-		$this->create('on progress', $id);
 		$refresh;
-	}
 
-	public function finish($id)
-	{
-		$this->create('finish', $id);
-		$this->description = '';
-		$refresh;
-	}
-
-	public function takeOver($id)
-	{
-		$this->create('take over', $id);
-		$this->description = '';
-		$refresh;
-	}
-
-	public function decline($id)
-	{
-		$this->create('declined', $id);
-		$this->description = '';
-		$refresh;
+		return true;
 	}
 }

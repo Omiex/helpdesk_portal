@@ -20,4 +20,12 @@ class Progress extends Model
 	{
 		return $this->belongsTo(User::class, 'staff_id');
 	}
+
+	public static function grouped()
+	{
+		return Progress::with('proceed_by')
+			->with('problem')
+			->get()
+			->groupBy('problem_id');
+	}
 }
