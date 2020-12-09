@@ -23,12 +23,12 @@ Route::middleware(['auth:sanctum', 'verified'])
 		return view('dashboard');
 	})->name('dashboard');
 
-Route::middleware(['auth', 'role:admin'])
-	->get('user', function () {
-		return view('user.index');
-	})->name('user.index');
-
 Route::middleware(['auth', 'role:admin,staff'])
 	->get('tickets', function() {
 		return view('tickets');
 	})->name('tickets');
+
+Route::middleware(['auth', 'role:admin'])
+	->get('user', function () {
+		return view('users');
+	})->name('user.index');

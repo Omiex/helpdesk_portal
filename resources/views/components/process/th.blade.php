@@ -4,8 +4,8 @@
 ])
 @php
 	$class = $scope == 'col'
-		? 'px-2 py-1 bg-'.$color.'-700 text-white text-left sticky top-0 truncate z-10'
-		: 'p-2 align-top'
+		? 'p-2 text-left sticky top-0 truncate z-20 bg-'.$color.'-700 text-white'
+		: 'p-2 text-center sticky left-0 align-top z-10 bg-white'
 @endphp
 
 <th {{ $attributes->merge(['class' => $class]) }}>

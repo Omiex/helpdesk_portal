@@ -1,9 +1,9 @@
 @props(['id', 'clear' => "openModal = false"])
-<div id="{{ $id }}" class="z-50 fixed">
+<div id="{{ $id }}" class="z-40 fixed">
 	<div x-show="modalOpen"
 		x-on:close.stop="{{ $clear }}"
 		x-on:keydown.escape.window="{{ $clear }}"
-		class="max-h-screen overflow-y-auto fixed top-0 inset-x-0 px-4 py-6 sm:flex sm:items-top sm:justify-center z-10"
+		class="max-h-screen overflow-y-auto fixed top-0 inset-x-0 px-4 py-6 sm:flex sm:items-top sm:justify-center"
 		style="display:none"
 	>
 		<div x-show="modalOpen" class="fixed inset-0 transform transition-all" x-on:click="{{ $clear }}"

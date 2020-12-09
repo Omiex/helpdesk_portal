@@ -25,8 +25,8 @@
 			<table class="table-auto w-full">
 				<thead>
 					<tr>
-						<x-process.th class="text-center">#</x-process.th>
-						<x-process.th class="text-center">Ticket #</x-process.th>
+						<x-process.th class="sticky left-0 z-30 text-center">#</x-process.th>
+						<x-process.th class="sticky left-0 z-30 text-center">Ticket #</x-process.th>
 						<x-process.th>Time</x-process.th>
 						<x-process.th>Name</x-process.th>
 						<x-process.th>ID</x-process.th>
@@ -52,8 +52,8 @@
 							}
 						@endphp
 						<tr wire:key="{{ $p->id }}">
-							<x-process.th scope="row" class="text-center">{{ $loop->iteration }}</x-process.th>
-							<x-process.td>{{ $problem->ticket_number }}</x-process.td>
+							<x-process.th scope="row">{{ $loop->iteration }}</x-process.th>
+							<x-process.th scope="row">{{ $problem->ticket_number }}</x-process.th>
 							<x-process.td>{{ $problem->created_at }}</x-process.td>
 							<x-process.td>{{ $problem->user->name }}</x-process.td>
 							<x-process.td>{{ $problem->user->nik }}</x-process.td>

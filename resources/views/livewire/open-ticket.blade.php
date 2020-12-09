@@ -1,39 +1,8 @@
 <div>
-<x-open-ticket.index />
-{{-- <div class="px-4 py-2 rounded bg-grey-100" x-data="test()" role="button"
-	@click="set"
-	@click="$wire.makeTicketNumber().then(result => { console.log(result) })"
->
-	ini test
-</div> --}}
+	<x-open-ticket.index />
+</div>
 @push('scripts')
 	<script>
-		// function test() {
-		// 	return {
-		// 		fileName: '',
-		//
-		// 		set: async function() {
-		// 			let promise = new Promise((resolve, reject) => {
-		// 				setTimeout(() => resolve("done!"), 3000)
-		// 			});
-		//
-		// 			this.fileName = await promise; // wait until the promise resolves (*)
-		//
-		// 			alert(this.fileName); // "done!"
-		// 		},
-		//
-		// 		// change: async function() {
-		// 		// 	setTimeout(() => {
-		// 		// 		return 'Ini dia'
-		// 		// 	}, 3000)
-		// 		// },
-		// 		//
-		// 		// set: async function() {
-		// 		// 	this.fileName = await this.change()
-		// 		// 	console.log(this.fileName)
-		// 		// }
-		// 	}
-		// }
 		function openTicket() {
 			return {
 				imageShow: false,
@@ -94,18 +63,21 @@
 
 					@this.upload('image', file, (uploadedFilename) => {
 						this.fileName = uploadedFilename
+						return true
 					}, () => {
 						console.log("upload foto error")
+						return false
 					}, (event) => {
 						// event.detail.progress
 					})
 				},
 
 				store: async function() {
-					// this.imageStore()
+					await this.imageStore()
 
 					@this.description = this.description
 					@this.ip_address = this.ip_address
+					@this.image_path = this.fileName
 
 					@this.store()
 				},
@@ -113,4 +85,3 @@
 		}
 	</script>
 @endpush
-</div>

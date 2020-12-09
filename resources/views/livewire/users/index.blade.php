@@ -106,7 +106,7 @@
 				</thead>
 				<tbody wire:loading.class="animate-pulse" wire:target="limit" class="border-b">
 					@foreach($users as $user)
-						<tr @if($loop->iteration % 2 == 1) class="bg-gray-100" @endif>
+						<tr wire:key="{{ $user->id }}" @if($loop->iteration % 2 == 1) class="bg-gray-100" @endif>
 							<td class="text-center px-4 py-2">{{ $users->firstItem() + $loop->index }}</td>
 							<td class="px-4 py-2">{{ $user->nik }}</td>
 							<td class="px-4 py-2">{{ $user->name }}</td>
