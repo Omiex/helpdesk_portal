@@ -29,6 +29,7 @@
 				alertMessage: null,
 				alertType	: null,
 				alertColor	: null,
+				alertTimeout: null,
 
 				imageChange: function() {
 					if (this.image.value) {
@@ -68,6 +69,7 @@
 					this.image.value = null
 					this.description = ''
 					this.imageChange()
+					this.problemChange()
 				},
 
 				store: async function() {
@@ -96,17 +98,19 @@
 						this.alert(status, 'success')
 						this.resetValues()
 					} else {
+						@this.image = null
 						status = 'Ukuran maksimum gambar yang dapat diupload adalah 2 MB, mohon periksa kembali'
 						this.alert(status, 'warning')
 					}
 				},
 
 				alert: function(message, type = null) {
+					clearTimeout(this.alertTimeout)
 					this.alertMessage = message
 					this.alertType = type
 					this.alertColorSet()
 					this.alertShow = true
-					setTimeout(() => { this.alertReset() }, 10000)
+					this.alertTimeout = setTimeout(() => { this.alertReset() }, 10000)
 				},
 
 				alertColorSet: function() {

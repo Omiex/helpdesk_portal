@@ -120,6 +120,18 @@
 			<x-jet-responsive-nav-link href="/dashboard" :active="request()->routeIs('dashboard')">
 				{{ __('Dashboard') }}
 			</x-jet-responsive-nav-link>
+
+			@role('admin', 'staff')
+			<x-jet-responsive-nav-link href="{{ route('tickets') }}" :active="request()->routeIs('tickets')">
+				Tickets
+			</x-jet-responsive-nav-link>
+			@endrole
+
+			@role('admin')
+			<x-jet-responsive-nav-link href="/user" :active="request()->routeIs('user.index')">
+				User List
+			</x-jet-responsive-nav-link>
+			@endrole
 		</div>
 
 		<!-- Responsive Settings Options -->

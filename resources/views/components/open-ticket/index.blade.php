@@ -35,6 +35,7 @@
 		</div>
 		<div class="relative rounded-md shadow-sm">
 			<button class="disabled:opacity-50 disabled:bg-indigo-500 focus:ring-indigo-500 hover:bg-indigo-500 focus:border-indigo-500 block w-full px-3 py-2 mt-2 bg-indigo-700 text-white sm:text-sm border-gray-900 rounded-md"
+				disabled
 				x-model="sendButton"
 				:disabled="sendButtonDisabled"
 				x-on:click.prevent="modalOpen = true"
@@ -42,7 +43,7 @@
 		</div>
 	</div>
 	<x-open-ticket.modal id="modal" />
-	<x-alert2>
+	<x-alert>
 		<span x-text="alertMessage"></span>
-	</x-alert2>
+	</x-alert>
 </div>

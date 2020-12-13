@@ -19,14 +19,21 @@
 	</div>
 </div>
 <script>
+	setInterval(function(){ Livewire.emit('processRefresh') }, 3000)
 	function table() {
 		return {
-			show: false,
-			modalOpen: false,
-			action: '',
-			id: '',
-			ticket_number: '',
-			desc: '',
+			show		: false,
+			modalOpen	: false,
+			action		: null,
+			id			: null,
+			ticket_number: null,
+			desc		: null,
+
+			alertShow	: false,
+			alertMessage: null,
+			alertType	: null,
+			alertColor	: 'green',
+			alertTimeout: null,
 
 			prompt: function(action, id, ticket_number) {
 				this.action = action
@@ -37,15 +44,41 @@
 
 			clear: function() {
 				this.modalOpen = false
-				this.action = ''
-				this.id = ''
-				this.ticket_number = ''
-				this.desc = ''
+				setTimeout(() => {
+					this.action = ''
+					this.id = ''
+					this.ticket_number = ''
+					this.desc = ''
+				}, 300)
+			},
+
+			progress: async function(id) {
+				let message = await @this.create('on progress', id)
+				this.alert(message)
 			},
 
 			simpan: async function() {
-				await @this.create(this.action, this.id, this.desc)
+				let message = await @this.create(this.action, this.id, this.desc)
 				this.clear()
+				setTimeout(() => { this.alert(message) }, 300)
+			},
+
+			alert: function(message, type = 'success') {
+				clearTimeout(this.alertTimeout)
+
+				this.alertMessage = message
+				this.alertType = type
+				this.alertShow = true
+
+				this.alertTimeout = setTimeout(() => { this.alertReset() }, 5000)
+			},
+
+			alertReset: function() {
+				this.alertShow = false
+				setTimeout(() => {
+					this.alertMessage= null
+					this.alertType	 = null
+				}, 300)
 			}
 		}
 	}

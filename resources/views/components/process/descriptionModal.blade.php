@@ -4,7 +4,7 @@
 			<h1 class="mb-6 text-lg">Berikan Remark</h1>
 			<div class="block text-sm font-medium text-gray-700">Berikan informasi kepada user dan staff IT yang lain tentang progress tiket <b x-text="ticket_number"></b>
 			</div>
-			<input type="text" x-model="desc" class="form-textarea mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md max-h-40" />
+			<input type="text" x-model="desc" class="form-textarea mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md max-h-40" required />
 		</div>
 
 		<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

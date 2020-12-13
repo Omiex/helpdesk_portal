@@ -37,6 +37,7 @@
 						<x-process.th>Phone</x-process.th>
 						<x-process.th>Description</x-process.th>
 						@if ($type == 'take over')
+							<x-process.th>Proceed by</x-process.th>
 							<x-process.th>Remark</x-process.th>
 						@endif
 						<x-process.th>Capture</x-process.th>
@@ -64,12 +65,13 @@
 							<x-process.td>{{ $problem->user->telepon }}</x-process.td>
 							<x-process.td>{{ $problem->description }}</x-process.td>
 							@if ($type == 'take over')
+								<x-process.td>{{ $p->proceed_by->name }}</x-process.td>
 								<x-process.td>{{ $p->description }}</x-process.td>
 							@endif
 							<x-process.td>{{ $problem->image_path }}</x-process.td>
 							<x-process.td class="text-right">
 								@if ($type != 'on progress')
-									<x-process.button x-on:click="$wire.create('on progress', {{ $problem->id }})">
+									<x-process.button x-on:click="progress({{ $problem->id }})">
 										Process
 									</x-process.button>
 								@endif
@@ -99,4 +101,7 @@
 		</div>
 	</div>
 	@include('components.process.descriptionModal')
+	<x-alert>
+		<span x-text="alertMessage"></span>
+	</x-alert>
 </div>

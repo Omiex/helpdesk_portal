@@ -9,7 +9,7 @@ use Auth;
 
 class Process extends Component
 {
-	protected $listeners = ['refresh' => '$refresh'];
+	protected $listeners = ['processRefresh' => '$refresh'];
 
     public function render()
     {
@@ -41,14 +41,14 @@ class Process extends Component
 	public function create($process, $id, $desc = '')
 	{
 		$progress = new Progress;
-		$progress->create([
+		$result = $progress->create([
 			'problem_id' => $id,
 			'staff_id' => Auth::user()->id,
 			'process' => $process,
 			'description' => $desc
 		]);
-		$refresh;
 
-		return true;
+		$refresh;
+		return 'Tiket '.$result->problem->ticket_number." telah berhasil diubah statusnya menjadi $process";
 	}
 }
