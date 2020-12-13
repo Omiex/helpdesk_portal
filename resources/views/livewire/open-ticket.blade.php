@@ -5,82 +5,135 @@
 	<script>
 		function openTicket() {
 			return {
-				imageShow: false,
-				modalOpen: false,
+				image		: this.image,
+				imageShow	: false,
+				imageName	: '',
+				imageButton	: 'Upload screen capture (max 2 MB)',
+				sendButton	: 'Kirim',
+				sendButtonDisabled : true,
+				fileName	: '',
 
-				nik: '{{ Auth::user()->nik }}',
-				user_id: '{{ Auth::user()->id }}',
-				name: '{{ Auth::user()->name }}',
-				telepon: '{{ Auth::user()->telepon }}',
-				email: '{{ Auth::user()->email }}',
-				divisi: '{{ Auth::user()->divisi }}',
-				lokasi: '{{ Auth::user()->lokasi }}',
-				ip_address: '{{ Request::ip() }}',
-				description: '',
-				fileName: '',
+				modalOpen	: false,
+				nik			: '{{ Auth::user()->nik }}',
+				user_id		: '{{ Auth::user()->id }}',
+				name		: '{{ Auth::user()->name }}',
+				telepon		: '{{ Auth::user()->telepon }}',
+				email		: '{{ Auth::user()->email }}',
+				divisi		: '{{ Auth::user()->divisi }}',
+				lokasi		: '{{ Auth::user()->lokasi }}',
+				ip_address	: '{{ Request::ip() }}',
+				description	: '',
+				sending		: false,
 
-				imageChange: function(el) {
-					let reader = new FileReader()
+				alertShow	: false,
+				alertMessage: null,
+				alertType	: null,
+				alertColor	: null,
 
-					reader.onload = () => {
-						el.imagePreview.src = reader.result
-						el.modalImagePreview.src = reader.result
-						this.imageShow = true
-					}
-
-					reader.readAsDataURL(event.target.files[0])
-					el.imageButton.value = "Ganti gambar"
-				},
-
-				imageReset: function(el) {
-					this.imageShow = false
-					setTimeout(() => {
-						el.imagePreview.src = ''
-						el.modalImagePreview = ''
-						el.imageInput.value = null
-						el.imageButton.value = "Upload screen capture"
-					}, 200)
-				},
-
-				problemFilled: function(el) {
-					if (event.target.value != '') {
-						el.submitButton.disabled = false
+				imageChange: function() {
+					if (this.image.value) {
+						let reader = new FileReader()
+						reader.readAsDataURL(event.target.files[0])
+						// this.file = event.target.files
+						reader.onload = async () => {
+							await (this.imageName = reader.result)
+							this.imageShow = true
+						}
 					} else {
-						el.submitButton.disabled = true
+						this.imageShow = false
+						setTimeout(() => {
+							this.imageName = ''
+						}, 200)
+					}
+
+					this.imageButton = this.image.value
+						? 'Ganti Gambar (max 2 MB)'
+						: 'Upload screen capture (max 2 MB)'
+				},
+
+				imageReset: function() {
+					this.image.value = null
+					this.imageChange()
+				},
+
+				problemChange: function() {
+					if (this.description != '') {
+						this.sendButtonDisabled = false
+					} else {
+						this.sendButtonDisabled = true
 					}
 				},
 
-				bersihkan: function() {
-					console.log('session')
-					this.imageShow = false
-					this.modalOpen = false
+				resetValues: function() {
+					this.image.value = null
 					this.description = ''
-					sessionStorage.clear()
-				},
-
-				imageStore: function() {
-					let file = document.querySelector('#imageInput').files[0]
-
-					@this.upload('image', file, (uploadedFilename) => {
-						this.fileName = uploadedFilename
-						return true
-					}, () => {
-						console.log("upload foto error")
-						return false
-					}, (event) => {
-						// event.detail.progress
-					})
+					this.imageChange()
 				},
 
 				store: async function() {
-					await this.imageStore()
-
+					this.sending = true
+					let imageStore = new Promise((resolve, reject) => {
+						let file = this.image.files[0]
+						if (file) {
+							@this.upload('image', file, function(fileName) {
+								resolve(fileName)
+							})
+						} else {
+							resolve('')
+						}
+					})
+					await imageStore
 					@this.description = this.description
 					@this.ip_address = this.ip_address
-					@this.image_path = this.fileName
 
-					@this.store()
+					let status = await @this.store()
+					this.modalOpen = false
+					setTimeout(() => {
+						this.sending = false
+					}, 200)
+
+					if (status) {
+						this.alert(status, 'success')
+						this.resetValues()
+					} else {
+						status = 'Ukuran maksimum gambar yang dapat diupload adalah 2 MB, mohon periksa kembali'
+						this.alert(status, 'warning')
+					}
 				},
+
+				alert: function(message, type = null) {
+					this.alertMessage = message
+					this.alertType = type
+					this.alertColorSet()
+					this.alertShow = true
+					setTimeout(() => { this.alertReset() }, 10000)
+				},
+
+				alertColorSet: function() {
+					switch (this.alertType) {
+						case 'success':
+							this.alertColor = 'green';
+							break;
+						case 'warning':
+							this.alertColor = 'yellow';
+							break;
+						case 'danger':
+							this.alertColor = 'red';
+							break;
+						default:
+							this.alertColor = 'blue';
+							break;
+					}
+				},
+
+				alertReset: function() {
+					this.alertShow	 = false
+					setTimeout(() => {
+						this.alertMessage= null
+						this.alertType	 = null
+						this.alertColor	 = null
+					}, 300)
+				}
 			}
 		}
 	</script>

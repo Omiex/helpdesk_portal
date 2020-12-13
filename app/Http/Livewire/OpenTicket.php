@@ -13,7 +13,8 @@ class OpenTicket extends Component
 {
 	use WithFileUploads;
 
-	public $user_id, $ticket_number, $ip_address, $description, $image_path, $image;
+	public $user_id, $ticket_number, $ip_address, $description, $image;
+	protected $image_path;
 
     public function render()
     {
@@ -26,6 +27,11 @@ class OpenTicket extends Component
 		$this->ticket_number = strtoupper(Str::random(8));
 	}
 
+	public function resetValues()
+	{
+		$this->reset(['user_id', 'ticket_number', 'ip_address', 'description', 'image', 'image_path']);
+	}
+
 	public function store()
 	{
 		$this->setValues();
@@ -35,8 +41,14 @@ class OpenTicket extends Component
 			'ticket_number' => 'required|unique:problems',
 			'ip_address' => 'required',
 			'description' => 'required|string',
-			'image_path' => 'nullable|string'
+			'image' => 'nullable|image|max:2048',
 		]);
+
+		if ($this->image) {
+			$this->image_path = $this->image->storeAs('images', $this->ticket_number.'.'.$this->image->getClientOriginalExtension());
+		} else {
+			$this->image_path = null;
+		}
 
 		$problem = Problem::create([
 			'user_id' => $this->user_id,
@@ -46,10 +58,12 @@ class OpenTicket extends Component
 			'image_path' => $this->image_path,
 		]);
 
+		$this->resetValues();
+
 		if ($problem) {
-			session()->flash('message', "Open ticket berhasil dikirimkan dengan kode $problem->ticket_number");
+			return "Open ticket berhasil dikirimkan dengan kode $problem->ticket_number";
 		} else {
-			session()->flash('message', 'Open ticket tidak dapat dikirim');
+			return 'Open ticket tidak dapat dikirim';
 		}
 	}
 }
