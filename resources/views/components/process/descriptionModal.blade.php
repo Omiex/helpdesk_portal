@@ -8,18 +8,21 @@
 		</div>
 
 		<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-			<div role="button" x-on:click="clear" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-				Batalkan
-			</div>
+			<template x-if="!sending">
+				<div role="button" x-on:click.prevent="clear" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+					Batalkan
+				</div>
+			</template>
 			<button type="submit"
-				wire:loading.class="bg-gray-600 hover:bg-gray-600"
-				wire:loading.class.remove="bg-indigo-600 hover:bg-indigo-700"
-				wire:loading.attr="disabled"
-				wire:target="create"
-				class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				x-bind:disabled="sending"
+				class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 			>
-				<span wire:loading wire:target="create">Saving...</span>
-				<span wire:loading.remove wire:target="create">Kirim</span>
+				<template x-if="sending">
+					<span>Sending...</span>
+				</template>
+				<template x-if="!sending">
+					<span>Kirim</span>
+				</template>
 			</button>
 		</div>
 	</form>

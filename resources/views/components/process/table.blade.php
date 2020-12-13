@@ -68,7 +68,16 @@
 								<x-process.td>{{ $p->proceed_by->name }}</x-process.td>
 								<x-process.td>{{ $p->description }}</x-process.td>
 							@endif
-							<x-process.td>{{ $problem->image_path }}</x-process.td>
+							<x-process.td>
+								@if ($problem->image_path)
+									<img role="button"
+										class="rounded shadow"
+										src="{{ asset($problem->image_path) }}" alt="{{ $problem->image_path }}" loading="lazy"
+									>
+								@else
+									no image
+								@endif
+							</x-process.td>
 							<x-process.td class="text-right">
 								@if ($type != 'on progress')
 									<x-process.button x-on:click="progress({{ $problem->id }})">

@@ -1,5 +1,5 @@
 @props(['id', 'clear' => "modalOpen = false"])
-<div id="{{ $id }}" class="z-40 fixed">
+<div id="{{ $id }}" class="z-50 fixed">
 	<div class="max-h-screen overflow-y-auto fixed top-0 inset-x-0 p-2 sm:p-4 flex items-top justify-center"
 		x-show="modalOpen"
 		x-on:close.stop="{{ $clear }}"

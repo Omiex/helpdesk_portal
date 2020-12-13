@@ -19,7 +19,12 @@
 	</div>
 </div>
 <script>
-	setInterval(function(){ Livewire.emit('processRefresh') }, 3000)
+	window.onload = function() {
+		setInterval(function(){
+			Livewire.emit('processRefresh')
+		}, 3000)
+	}
+
 	function table() {
 		return {
 			show		: false,
@@ -28,6 +33,8 @@
 			id			: null,
 			ticket_number: null,
 			desc		: null,
+
+			sending		: false,
 
 			alertShow	: false,
 			alertMessage: null,
@@ -49,6 +56,7 @@
 					this.id = ''
 					this.ticket_number = ''
 					this.desc = ''
+					this.sending = false
 				}, 300)
 			},
 
@@ -58,6 +66,7 @@
 			},
 
 			simpan: async function() {
+				this.sending = true
 				let message = await @this.create(this.action, this.id, this.desc)
 				this.clear()
 				setTimeout(() => { this.alert(message) }, 300)

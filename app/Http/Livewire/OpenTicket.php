@@ -45,7 +45,9 @@ class OpenTicket extends Component
 		]);
 
 		if ($this->image) {
-			$this->image_path = $this->image->storeAs('images', $this->ticket_number.'.'.$this->image->getClientOriginalExtension());
+			$this->image_path = $this->image->storeAs(
+				'images', $this->ticket_number.'.'.$this->image->getClientOriginalExtension()
+			);
 		} else {
 			$this->image_path = null;
 		}
@@ -59,6 +61,7 @@ class OpenTicket extends Component
 		]);
 
 		$this->resetValues();
+		$this->emit('queueRefresh');
 
 		if ($problem) {
 			return "Open ticket berhasil dikirimkan dengan kode $problem->ticket_number";
