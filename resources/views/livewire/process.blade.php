@@ -19,19 +19,22 @@
 	</div>
 </div>
 <script>
-	window.onload = function() {
-		setInterval(function(){
+	var ticketSyncInterval = null
+
+	function ticketSync() {
+		window.clearInterval(ticketSyncInterval)
+		ticketSyncInterval = window.setInterval(function(){
 			Livewire.emit('processRefresh')
 		}, 3000)
 	}
 
-	function table() {
+	function ticketTable() {
 		return {
 			show		: false,
 			modalOpen	: false,
 			action		: null,
 			id			: null,
-			ticket_number: null,
+			ticket_number : null,
 			desc		: null,
 
 			sending		: false,
@@ -88,6 +91,46 @@
 					this.alertMessage= null
 					this.alertType	 = null
 				}, 300)
+			},
+		}
+	}
+
+	function ticketImage() {
+		return {
+			thumbnail	: null,
+			preview		: null,
+
+			thumbnailShow	: true,
+			previewShow		: false,
+
+			// thumbnailX	: null,
+			// thumbnailY	: null,
+			// thumbnailW	: null,
+			// thumbnailH	: null,
+			//
+			// previewX	: null,
+			// previewY	: null,
+			// previewW	: null,
+			// previewH	: null,
+			//
+			// wW	: null,
+			// wH	: null,
+
+			define : function(id) {
+				this.thumbnail = document.querySelector(`#thumbnail-${ id }`)
+				this.preview = document.querySelector(`#preview-${ id }`)
+			},
+
+			imagePreview : function() {
+				clearInterval(ticketSyncInterval)
+				this.thumbnailShow = false
+				this.previewShow = true
+			},
+
+			previewClose: function() {
+				this.previewShow = false
+				this.thumbnailShow = true
+				ticketSync()
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-<div x-data="table()">
+<div x-data="ticketTable()" x-init="ticketSync">
 	<h1 @click="show = !show" role="button">
 		<x-process.arrow />
 		@if ($problems->count() < 2)
@@ -68,12 +68,9 @@
 								<x-process.td>{{ $p->proceed_by->name }}</x-process.td>
 								<x-process.td>{{ $p->description }}</x-process.td>
 							@endif
-							<x-process.td>
+							<x-process.td class="overflow-hidden">
 								@if ($problem->image_path)
-									<img role="button"
-										class="rounded shadow"
-										src="{{ asset($problem->image_path) }}" alt="{{ $problem->image_path }}" loading="lazy"
-									>
+									<x-process.image id="{{ $p->id }}" src="{{ $problem->image_path }}" />
 								@else
 									no image
 								@endif
@@ -110,6 +107,7 @@
 		</div>
 	</div>
 	@include('components.process.descriptionModal')
+	{{-- @include('components.process.imageModal') --}}
 	<x-alert>
 		<span x-text="alertMessage"></span>
 	</x-alert>
