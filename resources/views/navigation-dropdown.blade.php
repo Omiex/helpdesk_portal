@@ -22,6 +22,10 @@
 					</x-jet-nav-link>
 					@endrole
 
+					<x-jet-nav-link href="{{ route('history') }}" :active="request()->routeIs('history')">
+						History
+					</x-jet-nav-link>
+
 					@role('admin')
 					<x-jet-nav-link href="/user" :active="request()->routeIs('user.index')">
 						User List
@@ -126,6 +130,10 @@
 				Tickets
 			</x-jet-responsive-nav-link>
 			@endrole
+
+			<x-jet-responsive-nav-link href="{{ route('history') }}" :active="request()->routeIs('history')">
+				History
+			</x-jet-responsive-nav-link>
 
 			@role('admin')
 			<x-jet-responsive-nav-link href="/user" :active="request()->routeIs('user.index')">

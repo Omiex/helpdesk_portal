@@ -28,6 +28,11 @@ Route::middleware(['auth', 'role:admin,staff'])
 		return view('tickets');
 	})->name('tickets');
 
+Route::middleware(['auth:sanctum', 'verified'])
+	->get('history', function() {
+		return view('history');
+	})->name('history');
+
 Route::middleware(['auth', 'role:admin'])
 	->get('user', function () {
 		return view('users');
