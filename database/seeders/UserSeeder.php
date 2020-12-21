@@ -16,14 +16,14 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::insert([
-            'nik' => 154354,
-            'name' => 'Komaruddin',
-            'divisi' => 'IT',
-            'jabatan' => 'Staff',
-            'lokasi' => 'LOC Ged. Merah Lt. C',
-            'telepon' => '087782327262',
-            'email' => 'komarudin@outlook.com',
-            'password' => Hash::make('Omiex@123'),
+            'nik' => 123456,
+            'name' => 'Admin',
+            'divisi' => '',
+            'jabatan' => '',
+            'lokasi' => '',
+            'telepon' => '',
+            'email' => '',
+            'password' => Hash::make('admin'),
             'role' => 'admin',
         ]);
     }
